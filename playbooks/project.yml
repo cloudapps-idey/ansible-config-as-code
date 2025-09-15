@@ -14,3 +14,6 @@
         controller_projects: "{{ (controller_projects | default([])) + lookup('ansible.builtin.vars', item) }}"
       loop: "{{ [] if (lookup('ansible.builtin.varnames', 'controller_projects.*')) is not string else (lookup('ansible.builtin.varnames', 'controller_projects.*') | split(',')) }}"
 
+    - name: Call dispatch role
+      ansible.builtin.include_role:
+        name: infra.aap_configuration.dispatch
