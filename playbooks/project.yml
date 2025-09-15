@@ -6,15 +6,8 @@
   gather_facts: false
 
   tasks:
-    - name: Create or update each project
-      ansible.controller.project:
-        name: "{{ item.name }}"
-        organization: "{{ item.organization }}"
-        scm_url: "{{ item.scm_url }}"
-        scm_branch: "{{ item.scm_branch }}"
-        scm_type: "{{ item.scm_type }}"
-        scm_clean: "{{ item.scm_clean }}"
-        scm_delete_on_update: "{{ item.scm_delete_on_update }}"
-        credential: "{{ item.credential }}"
-        state: present
-      loop: "{{ projects_to_create }}"
+    - name: Set fact for controller_projects
+      ansible.builtin.set_fact:
+        controller_projects: "{{ (controller_projects | default([])) + lookup('ansible.builtin.vars', item) }}"
+      loop: "{{ [] if (lookup('ansible.builtin.varnames', 'controller_projects.*')) is not string else (lookup('ansible.builtin.varnames', 'controller_projects.*') | split(',')) }}"
+
