@@ -1,0 +1,11 @@
+---
+- name: Playbook to configure ansible controller post installation
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Set fact for controller_projects
+      ansible.builtin.set_fact:
+        controller_projects: "{{ (controller_projects | default([])) + lookup('ansible.builtin.vars', item) }}"
+      loop: "{{ [] if (lookup('ansible.builtin.varnames', 'controller_projects.*')) is not string else (lookup('ansible.builtin.varnames', 'controller_projects.*') | split(',')) }}"
+ 
