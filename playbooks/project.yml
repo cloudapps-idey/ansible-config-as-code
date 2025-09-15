@@ -8,7 +8,7 @@
   tasks:
     - name: Debugging the varnames lookup
       ansible.builtin.debug:
-        msg: "{{ lookup('ansible.builtin.varnames', 'controller_projects_*') }}"
+        msg: "{{ lookup('ansible.builtin.varnames', 'controller_projects*') }}"
     - name: Set fact for controller_projects
       ansible.builtin.set_fact:
         controller_projects: "{{ (controller_projects | default([])) + lookup('ansible.builtin.vars', item) }}"
