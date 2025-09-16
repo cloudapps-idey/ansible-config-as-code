@@ -2,6 +2,7 @@
 collections:
   - name: infra.aap_configuration
     version: "3.0.0"
+    source: "https://galaxy.ansible.com/ui/repo/published/infra/aap_configuration/"
   
   
 ...
