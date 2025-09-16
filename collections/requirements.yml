@@ -8,5 +8,9 @@ collections:
     version: "2.8.0"
   - name: containers.podman
     version: "1.18.0"
+  - name: ansible.platform
+  - name: ansible.hub
+  - name: ansible.controller
+  - name: ansible.eda
   
 ...
